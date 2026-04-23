@@ -13,6 +13,16 @@ namespace WorkOrderSystem.Models
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public int DepartmentId { get; set; }
+
+        public WorkOrder() { }
+        public WorkOrder(string title, string description, int departmentId)
+        {
+            Title = title;
+            Description = description;
+            Status = "Open";
+            CreatedDate = DateTime.Now;
+            DepartmentId = departmentId;
+        }
     }
 
 }

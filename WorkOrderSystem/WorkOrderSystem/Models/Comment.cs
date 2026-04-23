@@ -11,5 +11,13 @@ namespace WorkOrderSystem.Models
         public int WorkOrderId { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
+
+        public Comment() { }
+        public Comment(int workOrderId, string text)
+        {
+            WorkOrderId = workOrderId;
+            Text = text;
+            Date = DateTime.Now;
+        }
     }
 }
