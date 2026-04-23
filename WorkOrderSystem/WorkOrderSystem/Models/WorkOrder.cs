@@ -14,4 +14,5 @@ namespace WorkOrderSystem.Models
         public DateTime CreatedDate { get; set; }
         public int DepartmentId { get; set; }
     }
+
 }
