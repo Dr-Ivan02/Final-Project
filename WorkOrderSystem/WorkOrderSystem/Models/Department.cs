@@ -11,7 +11,6 @@ namespace WorkOrderSystem.Models
         public string Name { get; set; }
 
         public Department() { }
-
         public Department(int id, string name)
         {
             Id = id;
