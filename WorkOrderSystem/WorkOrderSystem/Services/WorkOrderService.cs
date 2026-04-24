@@ -20,4 +20,21 @@ namespace WorkOrderSystem.Services
             return workOrders;
         }
     }
+
+    public List<WorkOrder> GetWorkOrdersByDepartment(int departmentId)
+    {
+        List<WorkOrder> result = new List<WorkOrder>();
+
+        foreach (var order in workOrders)
+        {
+            if (order.DepartmentId == departmentId)
+            {
+                result.Add(order);
+            }
+        }
+
+        return result;
+        }
 }
+
+    // To Fix 
