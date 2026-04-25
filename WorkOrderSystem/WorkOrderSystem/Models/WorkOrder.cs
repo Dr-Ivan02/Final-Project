@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WorkOrderSystem.Models
+﻿namespace WorkOrderSystem.Models
 {
     // Represents a work order assigned within the system
     public class WorkOrder

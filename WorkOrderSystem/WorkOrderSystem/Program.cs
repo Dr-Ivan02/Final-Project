@@ -31,6 +31,8 @@ if (currentUser.Role == "Supervisor")
 {
     currentRole = new GeneralSupervisor();
     Console.WriteLine("\nWelcome, General Supervisor.");
+    Console.ReadKey();
+    Console.Clear();
 }
 else
 {
@@ -48,12 +50,15 @@ else
     };
 
     Console.WriteLine($"\nWelcome, {department.Name} Department.");
+    Console.ReadKey();
+    Console.Clear();
 }
 
 string option;
 
 do
 {
+    Console.Clear();
     currentRole.ShowMenu();
 
     Console.Write("Select option: ");
@@ -134,6 +139,8 @@ void CreateWorkOrder(WorkOrderService service, DepartmentService departmentServi
     service.CreateWorkOrder(order);
 
     Console.WriteLine("Work order created successfully.");
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
 
 // Method to view all work orders (supervisor)
@@ -151,15 +158,16 @@ void ViewAllWorkOrders(WorkOrderService service, DepartmentService departmentSer
     {
         var department = departmentService.GetDepartmentById(order.DepartmentId);
 
-        Console.WriteLine($"ID: {order.Id}");
-        Console.WriteLine($"Title: {order.Title}");
-        Console.WriteLine($"Description: {order.Description}");
-        Console.WriteLine($"Status: {order.Status}");
-        Console.WriteLine($"Department ID: {order.DepartmentId}");
-        Console.WriteLine($"Department Name: {department?.Name ?? "Unknown"}");
-        Console.WriteLine($"Created Date: {order.CreatedDate}");
-        Console.WriteLine("------------------------");
+        Console.WriteLine($"     WORK ORDER #{order.Id}       ");
+        Console.WriteLine($"Title        : {order.Title}");
+        Console.WriteLine($"Description  : {order.Description}");
+        Console.WriteLine($"Status       : {order.Status}");
+        Console.WriteLine($"Department   : {department?.Name} (ID: {order.DepartmentId})");
+        Console.WriteLine($"Created Date : {order.CreatedDate:dd/MM/yyyy hh:mm tt}");
+        
     }
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
 
 // Method to update work order status
@@ -212,6 +220,8 @@ void UpdateStatus(WorkOrderService service)
 
     service.UpdateWorkOrderStatus(id, newStatus);
     Console.WriteLine("Status updated successfully.");
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
 
 // Method to add comment to work order
@@ -250,6 +260,8 @@ void AddComment(WorkOrderService service)
 
     service.AddCommentToWorkOrder(id, text);
     Console.WriteLine("Comment added successfully.");
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
 // Method to view comments for a work order
 void ViewComments(WorkOrderService service)
@@ -276,8 +288,9 @@ void ViewComments(WorkOrderService service)
         return;
     }
 
-    Console.WriteLine($"\nComments for work order: {order.Title}");
-    Console.WriteLine("--------------------------------");
+    Console.WriteLine($"\n       COMMENTS FOR ORDER #{order.Id}      ");
+    Console.WriteLine($"Title : {order.Title}");
+    Console.WriteLine("----------------------------------------");
 
     var comments = service.GetCommentsByWorkOrder(id);
 
@@ -291,6 +304,8 @@ void ViewComments(WorkOrderService service)
     {
         Console.WriteLine($"{c.Text} - {c.Date}");
     }
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
 
 // Method to delete work order (supervisor only)
@@ -337,6 +352,8 @@ void DeleteWorkOrder(WorkOrderService service)
     {
         Console.WriteLine("Delete operation cancelled.");
     }
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
 
 // Method to view work orders for a specific department
@@ -353,13 +370,13 @@ void ViewDepartmentOrders(WorkOrderService service, DepartmentService department
 
     foreach (var order in orders)
     {
-        Console.WriteLine($"ID: {order.Id}");
-        Console.WriteLine($"Title: {order.Title}");
-        Console.WriteLine($"Description: {order.Description}");
-        Console.WriteLine($"Status: {order.Status}");
-        Console.WriteLine($"Department ID: {order.DepartmentId}");
-        Console.WriteLine($"Department Name: {department?.Name ?? "Unknown"}");
-        Console.WriteLine($"Created Date: {order.CreatedDate}");
-        Console.WriteLine("------------------------");
+        Console.WriteLine($"        WORK ORDER #{order.Id}       ");
+        Console.WriteLine($"Title        : {order.Title}");
+        Console.WriteLine($"Description  : {order.Description}");
+        Console.WriteLine($"Status       : {order.Status}");
+        Console.WriteLine($"Department   : {department?.Name} (ID: {order.DepartmentId})");
+        Console.WriteLine($"Created Date : {order.CreatedDate:dd/MM/yyyy hh:mm tt}");
     }
+    Console.WriteLine("\nPress any key to continue...");
+    Console.ReadKey();
 }
