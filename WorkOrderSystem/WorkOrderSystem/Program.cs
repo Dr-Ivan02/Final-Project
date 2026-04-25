@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Work Order System - Starting...");
+﻿Console.WriteLine("");
