@@ -1,4 +1,5 @@
-﻿using WorkOrderSystem.Services;
+﻿using WorkOrderSystem.Models;
+using WorkOrderSystem.Services;
 
 var service = new WorkOrderService();
 
@@ -20,23 +21,23 @@ do
     switch (option)
     {
         case "1":
-            // Method to create order
+            CreateWorkOrder(service);
             break;
 
         case "2":
-            // Method to view order
+            ViewAllWorkOrders(service);
             break;
 
         case "3":
-            // Method to update order status
+            UpdateStatus(service);
             break;
 
         case "4":
-            // Method to add comments
+            AddComment(service);
             break;
 
         case "5":
-            // Method to view comments
+            ViewComments(service);
             break;
 
         case "0":
@@ -49,3 +50,84 @@ do
     }
 
 } while (option != "0");
+
+
+
+// Methods section
+
+// Method to create work order
+void CreateWorkOrder(WorkOrderService service)
+{
+    Console.Write("Title: ");
+    var title = Console.ReadLine();
+
+    Console.Write("Description: ");
+    var description = Console.ReadLine();
+
+    Console.Write("Department Id: ");
+    int departmentId = int.Parse(Console.ReadLine());
+
+    var order = new WorkOrder
+    {
+        Title = title,
+        Description = description,
+        Status = "Open",
+        CreatedDate = DateTime.Now,
+        DepartmentId = departmentId
+    };
+
+    service.CreateWorkOrder(order);
+    Console.WriteLine("Work order created.");
+}
+
+// Method to view all work orders
+void ViewAllWorkOrders(WorkOrderService service)
+{
+    var orders = service.GetAllWorkOrders();
+
+    foreach (var o in orders)
+    {
+        Console.WriteLine($"{o.Id} | {o.Title} | {o.Status} | Dept: {o.DepartmentId}");
+    }
+}
+
+// Method to update work order status
+void UpdateStatus(WorkOrderService service)
+{
+    Console.Write("Order Id: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Console.Write("New Status: ");
+    var status = Console.ReadLine();
+
+    service.UpdateWorkOrderStatus(id, status);
+    Console.WriteLine("Status updated.");
+}
+
+// Method to add comment to work order
+void AddComment(WorkOrderService service)
+{
+    Console.Write("Order Id: ");
+    int id = int.Parse(Console.ReadLine());
+
+    Console.Write("Comment: ");
+    var text = Console.ReadLine();
+
+    service.AddCommentToWorkOrder(id, text);
+    Console.WriteLine("Comment added.");
+}
+
+// Method to view comments for a work order
+void ViewComments(WorkOrderService service)
+{
+    Console.Write("Order Id: ");
+    int id = int.Parse(Console.ReadLine());
+
+    var comments = service.GetCommentsByWorkOrder(id);
+
+    foreach (var c in comments)
+    {
+        Console.WriteLine($"{c.Text} - {c.Date}");
+    }
+}
+
