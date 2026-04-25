@@ -30,7 +30,6 @@ namespace WorkOrderSystem.Services
         }
 
         // Updates the current state of a work order (Open, In Progress, Resolved)
-
         public void UpdateWorkOrderStatus(int orderId, string newStatus)
         {
             var order = context.WorkOrders.FirstOrDefault(o => o.Id == orderId);
@@ -56,6 +55,40 @@ namespace WorkOrderSystem.Services
             return context.Comments
                 .Where(c => c.WorkOrderId == workOrderId)
                 .ToList();
+        }
+
+        // Deletes a work order from the system
+        public void DeleteWorkOrder(int id)
+        {
+            var order = context.WorkOrders.FirstOrDefault(o => o.Id == id);
+
+            if (order != null)
+            {
+                var comments = context.Comments
+                    .Where(c => c.WorkOrderId == id)
+                    .ToList();
+
+                context.Comments.RemoveRange(comments);
+                context.WorkOrders.Remove(order);
+                context.SaveChanges();
+            }
+        }
+
+        // Retrieves a specific work order by its unique identifier
+        public WorkOrder? GetWorkOrderById(int id)
+        {
+            return context.WorkOrders.FirstOrDefault(o => o.Id == id);
+        }
+
+        // Deletes all comments associated with a specific work order
+        public void DeleteCommentsByWorkOrderId(int workOrderId)
+        {
+            var comments = context.Comments
+                .Where(c => c.WorkOrderId == workOrderId)
+                .ToList();
+
+            context.Comments.RemoveRange(comments);
+            context.SaveChanges();
         }
     }
 }

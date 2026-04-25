@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace WorkOrderSystem.Models
 {
-    // This class is used for different system roles (e.g., Admin, User) to determine access levels and permissions
+    // Abstract base class for user roles
     public abstract class Role
     {
-        public string RoleName { get; set; }
+        public string Username { get; set; } = string.Empty;
 
-        public Role(string roleName)
-        {
-            RoleName = roleName;
-        }
         public abstract void ShowMenu();
     }
 }
+
