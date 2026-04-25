@@ -14,6 +14,11 @@ namespace WorkOrderSystem.Services
             context.WorkOrders.Add(order);
             context.SaveChanges();
         }
+        public void CreateWorkOrder(string title, string description, int departmentId)
+        {
+            WorkOrder order = new WorkOrder(title, description, departmentId);
+            CreateWorkOrder(order);
+        }
 
         public List<WorkOrder> GetAllWorkOrders()
         {
@@ -77,17 +82,6 @@ namespace WorkOrderSystem.Services
         public WorkOrder? GetWorkOrderById(int id)
         {
             return context.WorkOrders.FirstOrDefault(o => o.Id == id);
-        }
-
-        // Deletes all comments associated with a specific work order
-        public void DeleteCommentsByWorkOrderId(int workOrderId)
-        {
-            var comments = context.Comments
-                .Where(c => c.WorkOrderId == workOrderId)
-                .ToList();
-
-            context.Comments.RemoveRange(comments);
-            context.SaveChanges();
         }
     }
 }
