@@ -1,5 +1,6 @@
 ﻿namespace WorkOrderSystem.Models
 {
+    // Represents a user account
     public class User
     {
         public int Id { get; set; }

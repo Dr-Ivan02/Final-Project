@@ -89,10 +89,7 @@ do
 
 } while (option != "0");
 
-
-// Methods section
-
-// Method to create work order
+//Methods       
 void CreateWorkOrder(WorkOrderService service, DepartmentService departmentService)
 {
     string title;
@@ -143,7 +140,6 @@ void CreateWorkOrder(WorkOrderService service, DepartmentService departmentServi
     Console.ReadKey();
 }
 
-// Method to view all work orders (supervisor)
 void ViewAllWorkOrders(WorkOrderService service, DepartmentService departmentService)
 {
     var orders = service.GetAllWorkOrders();
@@ -170,7 +166,6 @@ void ViewAllWorkOrders(WorkOrderService service, DepartmentService departmentSer
     Console.ReadKey();
 }
 
-// Method to update work order status
 void UpdateStatus(WorkOrderService service)
 {
     int id;
@@ -224,7 +219,6 @@ void UpdateStatus(WorkOrderService service)
     Console.ReadKey();
 }
 
-// Method to add comment to work order
 void AddComment(WorkOrderService service)
 {
     int id;
@@ -243,6 +237,7 @@ void AddComment(WorkOrderService service)
         return;
     }
 
+    // Prevents departments from accessing work orders assigned to other departments
     if (currentRole is DepartmentRole deptRole && order.DepartmentId != deptRole.DepartmentId)
     {
         Console.WriteLine("You do not have access to this work order.");
@@ -263,7 +258,7 @@ void AddComment(WorkOrderService service)
     Console.WriteLine("\nPress any key to continue...");
     Console.ReadKey();
 }
-// Method to view comments for a work order
+
 void ViewComments(WorkOrderService service)
 {
     int id;
@@ -282,6 +277,7 @@ void ViewComments(WorkOrderService service)
         return;
     }
 
+    // Prevents departments from accessing work orders assigned to other departments
     if (currentRole is DepartmentRole deptRole && order.DepartmentId != deptRole.DepartmentId)
     {
         Console.WriteLine("You do not have access to this work order.");
@@ -308,7 +304,7 @@ void ViewComments(WorkOrderService service)
     Console.ReadKey();
 }
 
-// Method to delete work order (supervisor only)
+
 void DeleteWorkOrder(WorkOrderService service)
 {
     var orders = service.GetAllWorkOrders();
@@ -356,7 +352,6 @@ void DeleteWorkOrder(WorkOrderService service)
     Console.ReadKey();
 }
 
-// Method to view work orders for a specific department
 void ViewDepartmentOrders(WorkOrderService service, DepartmentService departmentService, int departmentId)
 {
     var department = departmentService.GetDepartmentById(departmentId);
