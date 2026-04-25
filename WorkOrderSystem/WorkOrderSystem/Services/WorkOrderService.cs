@@ -21,7 +21,6 @@ namespace WorkOrderSystem.Services
         }
 
         // Filters work orders by department
-
         public List<WorkOrder> GetWorkOrdersByDepartment(int departmentId)
         {
             return context.WorkOrders

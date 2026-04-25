@@ -1,5 +1,6 @@
 ﻿namespace WorkOrderSystem.Models
 {
+    // Represents a department user with access limited
     public class DepartmentRole : Role
     {
         public int DepartmentId { get; set; }
